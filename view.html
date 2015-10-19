@@ -1,0 +1,33 @@
+<head>
+	<style>
+		.mesa{
+			margin-top: 4em;
+			text-align: center;
+		}
+		
+		input[type=button]{
+			margin: 20px;
+		}
+	</style>
+</head>
+<body>
+	<div class="mesa">
+		Jogador 1<br/>
+		<div id="jog1"></div>
+		<input type="button" id="mesa_jog1"/>
+		<input type="button" id="mesa_jog2"/>
+		<div id="jog2"></div>
+		<br/>Jogador 2
+		
+		<input type="hidden" id="rodada1" />
+		<input type="hidden" id="rodada2" />
+		<input type="hidden" id="rodada3" />
+	</div>
+
+<script src="pack.js"></script>
+<script src="card_interaction.js"></script>
+<script>
+	embaralhar();
+	geraCartas();
+</script>
+</body>
