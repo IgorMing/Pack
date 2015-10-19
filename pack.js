@@ -1,6 +1,7 @@
 (function() {
 	var CONST_NAIPES = ['Ouro', 'Espada', 'Copas', 'Paus'];
 	var CONST_VALUES = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'Q', 'J', 'K'];
+	var EXCEPTION_NOT_OBJECT = "The parameter value is not a 'Carta' object.";
 
 	function Carta(iValue, iNaipe){
 		this.value = CONST_VALUES[iValue];
@@ -19,21 +20,21 @@
 			
 		this.getNaipe = function(carta){
 			if (!carta.__proto__ === Carta.prototype)
-				throw "The parameter value is not a 'Carta' object.";
+				throw EXCEPTION_NOT_OBJECT;
 				
 			return carta.naipe;
 		}
 		
 		this.getValue = function(carta){
 			if (!carta.__proto__ === Carta.prototype)
-				throw "The parameter value is not a 'Carta' object.";
+				throw EXCEPTION_NOT_OBJECT;
 				
 			return carta.value;
 		}
 		
 		this.printAllCards = function(){
 			if(!this.__proto__ === Baralho.prototype)
-				throw "The parameter value is not a 'Carta' object.";
+				throw EXCEPTION_NOT_OBJECT;
 			
 			for(var i = 0; i < this.cartas.length; i++)
 				console.log(this.cartas[i].toString());

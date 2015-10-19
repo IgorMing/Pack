@@ -2,7 +2,9 @@
 	var VALUES = { "4" : 0, "5" : 1, "6" : 2, "7" : 3, "Q" : 4, "J" : 5, "K" : 6, "A" : 7, "1" : 8, "2" : 9, "3" : 10};
 	var NAIPES = {"Ouro" : 0, "Espada" : 1, "Copas" : 2, "Paus" : 3};
 	var DEFAULT_QTS_JOGADORES = 2;
-
+	
+	var _qtdJogadores;
+	
 	cartasNaMao = 3;
 	rodada = 1;
 	baralho = new Baralho();
@@ -23,29 +25,24 @@
 		baralho.shuffle();
 	}
 
-	function geraCartas(qtsJogadores){
-		if (typeof qtsJogadores == 'undefined')
-			qtsJogadores = DEFAULT_QTS_JOGADORES;
-		
+	function geraCartas(){
 		var id = 0;
-		for(var i = 1; i <= qtsJogadores; i++){
+		for(var i = 1; i <= _qtdJogadores; i++){
 			for(var c = 1; c <= cartasNaMao; c++){
-				var carta = criaElemento('input', 'jog' + i + '_card' + c + '|' + id);
-				carta.setAttribute('type', 'button');
-				carta.setAttribute('value', 'Card ' + c);
+				var carta = criaElemento('button', 'jog' + i + '_card' + c + '|' + id);
+				carta.innerHTML = 'Card ' + c;
 				carta.setAttribute('onclick', 'verCarta(this);');
 				carta.className = 'hideCard';
 				incluiNaMesa(carta, i);
 				++id;
 			}
-
 		}
 	}
 
 	function verCarta(obj){
 		obj.className = 'showCard';
 		obj.disabled = true;
-		document.getElementById('mesa_jog'+getIdPlayer(obj)).value = baralho.cartas[getIndexCarta(obj.id)];
+		document.getElementById('mesa_jog'+getIdPlayer(obj)).innerHTML = baralho.cartas[getIndexCarta(obj.id)];
 	}
 
 	function verificaMesa(){
@@ -67,6 +64,14 @@
 			el.setAttribute('id', id);
 		return el;
 	}
+	
+	function limpaMesa(){
+		var cartasEmMesa = document.getElementsByTagName('pre');
+		
+		for(var i = 0; i < _qtdJogadores; i++){
+			document.getElementById('jog' + (i+1)).innerHTML = cartasEmMesa[i].innerHTML = '';
+		}
+	}
 
 	function incluiNaMesa(obj, jog){
 		if (obj.tagName === undefined)
@@ -75,9 +80,23 @@
 		var doc = document.getElementById('jog' + jog).appendChild(obj);
 	}
 	
+	function inicio(qtdJogadores, embaralha){
+		
+		_qtdJogadores = (typeof qtdJogadores === 'undefined') ? DEFAULT_QTS_JOGADORES : qtdJogadores;
+		
+		if (typeof embaralha === 'undefined' || typeof embaralha !== 'boolean')
+			embaralha = true;
+		
+		limpaMesa();
+		
+		if(embaralha)
+			embaralhar();
+		
+		geraCartas();
+	}
+	
 	// Exporting functions
-	window.arrumaBaralho = arrumaBaralho();
-	window.embaralhar = embaralhar;
-	window.geraCartas = geraCartas;
+	window.arrumaBaralho = arrumaBaralho;
+	window.inicio = inicio;
 	window.verCarta = verCarta;
 })();

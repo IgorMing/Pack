@@ -5,7 +5,7 @@
 			text-align: center;
 		}
 		
-		input[type=button]{
+		button{
 			margin: 20px;
 		}
 	</style>
@@ -14,11 +14,13 @@
 	<div class="mesa">
 		Jogador 1<br/>
 		<div id="jog1"></div>
-		<input type="button" id="mesa_jog1"/>
-		<input type="button" id="mesa_jog2"/>
+		<pre id="mesa_jog1"></pre>
+		<hr>
+		<pre id="mesa_jog2"></pre>
 		<div id="jog2"></div>
-		<br/>Jogador 2
+		<br/>Jogador 2<br/>
 		
+		<button id="reset"/>Limpar</input>
 		<input type="hidden" id="rodada1" />
 		<input type="hidden" id="rodada2" />
 		<input type="hidden" id="rodada3" />
@@ -27,7 +29,11 @@
 <script src="pack.js"></script>
 <script src="card_interaction.js"></script>
 <script>
-	embaralhar();
-	geraCartas();
+	var qtdJogadores = 2;
+
+	inicio(qtdJogadores, false);
+	document.getElementById('reset').onclick = function(){
+		inicio(qtdJogadores, true);
+	}
 </script>
 </body>
