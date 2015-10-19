@@ -8,9 +8,8 @@
 	cartasNaMao = 3;
 	rodada = 1;
 	baralho = new Baralho();
-	arrumaBaralho();
 
-	function arrumaBaralho(){
+	function cartas_para_truco(){
 		for(var i = 0; i < baralho.cartas.length; i++){
 			if(baralho.cartas[i].value === '8' ||
 				baralho.cartas[i].value === '9' ||
@@ -96,7 +95,7 @@
 	}
 	
 	// Exporting functions
-	window.arrumaBaralho = arrumaBaralho;
+	window.cartas_para_truco = cartas_para_truco;
 	window.inicio = inicio;
 	window.verCarta = verCarta;
 })();

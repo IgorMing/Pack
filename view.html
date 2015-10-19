@@ -30,8 +30,8 @@
 <script src="card_interaction.js"></script>
 <script>
 	var qtdJogadores = 2;
-
-	inicio(qtdJogadores, false);
+	cartas_para_truco();
+	inicio(qtdJogadores, true);
 	document.getElementById('reset').onclick = function(){
 		inicio(qtdJogadores, true);
 	}
